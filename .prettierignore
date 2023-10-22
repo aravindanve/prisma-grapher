@@ -1,0 +1,14 @@
+# ignore artifacts
+node_modules
+package-lock.json
+yarn.lock
+.gen
+.expo-shared
+.expo
+.idea
+assets
+build
+coverage
+dist
+.next
+out
