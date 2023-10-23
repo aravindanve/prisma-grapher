@@ -1,0 +1,151 @@
+# dot reference for blog schema
+# https://dreampuf.github.io/GraphvizOnline
+
+digraph UML_Class_diagram {
+	graph [
+		label="Blog Schema"
+		labelloc="t"
+		fontname="sans-serif"
+        rankdir="LR"
+	]
+	node [
+		fontname="Helvetica, Arial, sans-serif"
+		shape=record
+		style=filled
+		fillcolor=gray95
+	]
+	edge [fontname="sans-serif" color="#004cff" minlen=5 arrowsize=1.2]
+	
+	Role [
+	    shape=plain
+	    label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="white" color="#004cff">
+			<tr> <td cellpadding="8" bgcolor="#bacefc"> <b>Role</b> </td> </tr>
+			<tr>
+			  <td>
+				<table border="0" cellborder="0" cellspacing="0" cellpadding="4" bgcolor="white">
+					<tr> <td>ADMIN</td> </tr>
+					<tr> <td>EDITOR</td> </tr>
+					<tr> <td port="default">AUTHOR</td> </tr>
+				</table>
+			  </td>
+			</tr>
+		</table>>
+	]
+	
+	edge [dir=both arrowtail=normal arrowhead=none]
+	Role -> User:role
+
+	User [
+	    shape=plain
+	    label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="white" color="#004cff">
+			<tr> <td cellpadding="8" bgcolor="#bacefc"> <b>User</b> </td> </tr>
+			<tr>
+			  <td>
+				<table border="0" cellborder="0" cellspacing="0" cellpadding="4" bgcolor="white">
+					<tr> <td cellpadding="0">◆</td> <td align="left">id</td> <td align="left"><font color="#4f83ff">Int</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">name</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">image</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">email</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">password</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
+					<tr> <td cellpadding="0" port="role">◇</td> <td align="left">role</td> <td align="left"><font color="#4f83ff">Role</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">created</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">updated</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
+					<tr> <td cellpadding="0">◇</td> <td align="left">posts</td> <td align="left" port="posts"><font color="#4f83ff">Post[]</font></td> </tr>
+
+				</table>
+			  </td>
+			</tr>
+		</table>>
+	]
+	
+	edge [dir=both arrowtail=normal arrowhead=none]
+	User:posts -> Post:author
+	
+	Category [
+	    shape=plain
+	    label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="white" color="#004cff">
+			<tr> <td cellpadding="8" bgcolor="#bacefc"> <b>Category</b> </td> </tr>
+			<tr>
+			  <td>
+				<table border="0" cellborder="0" cellspacing="0" cellpadding="4" bgcolor="white">
+					<tr> <td cellpadding="0">◆</td> <td align="left">id</td> <td align="left"><font color="#4f83ff">Int</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">name</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">created</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">updated</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
+                    <tr> <td cellpadding="0">◇</td> <td align="left">posts</td> <td align="left" port="posts"><font color="#4f83ff">Post[]</font></td> </tr>
+				</table>
+			  </td>
+			</tr>
+		</table>>
+	]
+	
+	edge [dir=both arrowtail=normal arrowhead=none]
+	Category:posts -> Post:category
+	
+	Tag [
+	    shape=plain
+	    label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="white" color="#004cff">
+			<tr> <td cellpadding="8" bgcolor="#bacefc"> <b>Tag</b> </td> </tr>
+			<tr>
+			  <td>
+				<table border="0" cellborder="0" cellspacing="0" cellpadding="4" bgcolor="white">
+					<tr> <td cellpadding="0">◆</td> <td align="left">id</td> <td align="left"><font color="#4f83ff">Int</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">name</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">created</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">updated</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
+                    <tr> <td cellpadding="0">◇</td> <td align="left">posts</td> <td align="left" port="posts"><font color="#4f83ff">Post[]</font></td> </tr>
+				</table>
+			  </td>
+			</tr>
+		</table>>
+	]
+
+	edge [dir=both arrowtail=none arrowhead=none]
+	Tag:posts -> Post:tags
+	
+	Post [
+	    shape=plain
+	    label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="white" color="#004cff">
+			<tr> <td cellpadding="8" bgcolor="#bacefc"> <b>Post</b> </td> </tr>
+			<tr>
+			  <td>
+				<table border="0" cellborder="0" cellspacing="0" cellpadding="4" bgcolor="white">
+					<tr> <td cellpadding="0">◆</td> <td align="left">id</td> <td align="left"><font color="#4f83ff">Int</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">name</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
+                    <tr> <td cellpadding="0" port="author">◇</td> <td align="left">author</td> <td align="left"><font color="#4f83ff">User</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">body</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">published</td> <td align="left"><font color="#4f83ff">Boolean</font></td> </tr>
+					<tr> <td cellpadding="0" port="category">◇</td> <td align="left">category</td> <td align="left"><font color="#4f83ff">Category</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">created</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">updated</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
+                    <tr> <td cellpadding="0" port="tags">◇</td> <td align="left">tags</td> <td align="left"><font color="#4f83ff">Tag[]</font></td> </tr>
+                    <tr> <td cellpadding="0">◇</td> <td align="left">comments</td> <td align="left" port="comments"><font color="#4f83ff">Comment[]</font></td> </tr>
+				</table>
+			  </td>
+			</tr>
+		</table>>
+	]
+	
+	edge [dir=both arrowtail=normal arrowhead=none]
+	Post:comments -> Comment:post
+	
+	Comment [
+	    shape=plain
+	    label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="white" color="#004cff">
+			<tr> <td cellpadding="8" bgcolor="#bacefc"> <b>Comment</b> </td> </tr>
+			<tr>
+			  <td>
+				<table border="0" cellborder="0" cellspacing="0" cellpadding="4" bgcolor="white">
+					<tr> <td cellpadding="0">◆</td> <td align="left">id</td> <td align="left"><font color="#4f83ff">Int</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">name</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">email</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">text</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
+					<tr> <td cellpadding="0" port="post">◇</td> <td align="left">post</td> <td align="left"><font color="#4f83ff">Post</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">created</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
+					<tr> <td cellpadding="0"></td> <td align="left">updated</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
+				</table>
+			  </td>
+			</tr>
+		</table>>
+	]
+}

@@ -19,6 +19,9 @@ module.exports = {
     "/dist",
   ],
   rules: {
+    // allow async functions without await
+    "@typescript-eslint/require-await": "off",
+
     // use plugin `unused-imports` instead of `no-unused-vars` rule to auto fix unused imports
     "@typescript-eslint/no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",

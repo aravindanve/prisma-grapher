@@ -1,16 +1,37 @@
 {
   "name": "prisma-grapher",
-  "version": "0.1.0",
+  "version": "0.1.9",
   "description": "ERD generator for prisma schemas",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "bin": "./dist/index.js",
   "author": "Aravindan Ve",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aravindanve/prisma-grapher"
+  },
+  "homepage": "https://github.com/aravindanve/prisma-grapher",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
-    "postpack": "pinst --enable"
+    "postpack": "pinst --enable",
+    "test": "jest",
+    "prebuild": "rm -rf dist",
+    "build": " tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn run build"
   },
+  "keywords": [
+    "Prisma",
+    "TypeScript",
+    "Graphviz",
+    "Dot",
+    "Entity Relationship Diagram",
+    "ERD"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -18,10 +39,12 @@
     "@prisma/client": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
+    "@hpcc-js/wasm": "^1.20.1",
     "@prisma/generator-helper": "^5.4.2"
   },
   "devDependencies": {
     "@prisma/client": "^5.4.2",
+    "@types/jest": "^29.5.6",
     "@types/node": "^20.8.7",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
@@ -34,6 +57,7 @@
     "pinst": "^3.0.0",
     "prettier": "^3.0.3",
     "prisma": "^5.4.2",
+    "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
@@ -43,7 +67,6 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
