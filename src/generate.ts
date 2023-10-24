@@ -12,6 +12,7 @@ import { writeFile } from "fs/promises";
 export type PrismaGrapherConfig = {
   disabled?: string;
   title?: string;
+  ignoreEnums?: string;
   lineColor?: string;
   headerBackgroundColor?: string;
   headerForegroundColor?: string;
@@ -31,6 +32,7 @@ export async function generate(options: GeneratorOptions) {
   const output = options.generator.output?.value || "./prisma/ERD.svg";
   const disabled = config.disabled === "true" || process.env.DISABLE_PRISMA_GRAPHER === "true";
   const title = config.title ?? "";
+  const ignoreEnums = config.ignoreEnums === "true";
   const lineColor = config.lineColor ?? "#004cff";
   const headerBackgroundColor = config.headerBackgroundColor ?? "#bacefc";
   const headerForegroundColor = config.headerForegroundColor ?? "black";
@@ -46,10 +48,10 @@ export async function generate(options: GeneratorOptions) {
   const models = [...options.dmmf.datamodel.models, ...options.dmmf.datamodel.types];
 
   // relation dot definitions
-  const enumByName = enums.reduce(
-    (acc, _enum) => ((acc[_enum.name] = _enum), acc),
-    {} as Record<string, DMMF.DatamodelEnum>,
-  );
+  const enumByName = !ignoreEnums
+    ? enums.reduce((acc, _enum) => ((acc[_enum.name] = _enum), acc), {} as Record<string, DMMF.DatamodelEnum>)
+    : {};
+
   const modelByName = models.reduce(
     (acc, model, index) => ((acc[model.name] = { ...model, index }), acc),
     {} as Record<string, DMMF.Model & { index: number }>,
@@ -100,111 +102,115 @@ export async function generate(options: GeneratorOptions) {
   );
 
   // enum dot definitions
-  const enumDotDefinitions = enums.map(
-    (_enum) => `
-    ${identifier(_enum.name)} [
-      shape=plain
-      label=<<table
-        border="0"
-        cellborder="1"
-        cellspacing="0"
-        cellpadding="4"
-        bgcolor="${bodyBackgroundColor}"
-        color="${lineColor}"
-      >
-        <tr>
-          <td
-            cellpadding="8"
-            bgcolor="${headerBackgroundColor}"
-          ><font color="${headerForegroundColor}">${"&nbsp;".repeat(2)}${_enum.name}${"&nbsp;".repeat(2)}</font></td>
-        </tr>
-        <tr>
-          <td>
-            <table
+  const enumDotDefinitions = !ignoreEnums
+    ? enums.map(
+        (_enum) => `
+          ${identifier(_enum.name)} [
+            shape=plain
+            label=<<table
               border="0"
-              cellborder="0"
+              cellborder="1"
               cellspacing="0"
               cellpadding="4"
               bgcolor="${bodyBackgroundColor}"
+              color="${lineColor}"
             >
-              ${_enum.values
-                .map((value) => `<tr><td><font color="${bodyForegroundColor}">${value.name}</font></td></tr>`)
-                .join("\n")}
-            </table>
-          </td>
-        </tr>
-      </table>>
-    ]
-  `,
-  );
+              <tr>
+                <td
+                  cellpadding="8"
+                  bgcolor="${headerBackgroundColor}"
+                ><font color="${headerForegroundColor}">${"&nbsp;".repeat(2)}${_enum.name}${"&nbsp;".repeat(
+                  2,
+                )}</font></td>
+              </tr>
+              <tr>
+                <td>
+                  <table
+                    border="0"
+                    cellborder="0"
+                    cellspacing="0"
+                    cellpadding="4"
+                    bgcolor="${bodyBackgroundColor}"
+                  >
+                    ${_enum.values
+                      .map((value) => `<tr><td><font color="${bodyForegroundColor}">${value.name}</font></td></tr>`)
+                      .join("\n")}
+                  </table>
+                </td>
+              </tr>
+            </table>>
+          ]
+        `,
+      )
+    : [];
 
   // model and type dot definitions
   const modelDotDefinitions = models.map(
     (model) => `
-    ${identifier(model.name)} [
-      shape=plain
-      label=<<table
-        border="0"
-        cellborder="1"
-        cellspacing="0"
-        cellpadding="4"
-        bgcolor="${bodyBackgroundColor}"
-        color="${lineColor}"
-      >
-        <tr>
-          <td
-            cellpadding="8"
-            bgcolor="${headerBackgroundColor}"
-          ><font color="${headerForegroundColor}">${"&nbsp;".repeat(2)}${model.name}${"&nbsp;".repeat(2)}</font></td>
-        </tr>
-        <tr>
-          <td>
-            <table
-              border="0"
-              cellborder="0"
-              cellspacing="0"
-              cellpadding="4"
-              bgcolor="${bodyBackgroundColor}"
-            >
-              ${model.fields
-                .filter(
-                  // exclude relation fields
-                  (field, i, fields) =>
-                    !fields.some((otherField) => otherField.relationFromFields?.includes(field.name)),
-                )
-                .map(
-                  (field) => `<tr>
-                    <td cellpadding="0" port="${
-                      field.kind === "enum" ||
-                      verticesRight.find((vertex) => vertex[0] === model.name && vertex[1] === field.name)
-                        ? field.name
-                        : ""
-                    }">${
-                      field.isId
-                        ? `<font color="${bodyForegroundColor}">&#9670;</font>`
-                        : field.relationFromFields !== undefined || field.kind === "enum"
-                        ? `<font color="${bodyForegroundColor}">&#9671;</font>`
-                        : ""
-                    }</td>
-                    <td align="left"><font color="${bodyForegroundColor}">${field.name}&nbsp;&nbsp;</font></td>
-                    <td align="left" port="${
-                      verticesLeft.find((vertex) => vertex[0] === model.name && vertex[1] === field.name)
-                        ? field.name
-                        : ""
-                    }"><font color="${typeForegroundColor}">${[
-                      field.type,
-                      field.isList ? "&nbsp;[&nbsp;]" : "",
-                      !field.isRequired ? "?" : "",
-                    ].join("")}&nbsp;</font></td>
-                  </tr>`,
-                )
-                .join("\n")}
-            </table>
-          </td>
-        </tr>
-      </table>>
-    ]
-  `,
+      ${identifier(model.name)} [
+        shape=plain
+        label=<<table
+          border="0"
+          cellborder="1"
+          cellspacing="0"
+          cellpadding="4"
+          bgcolor="${bodyBackgroundColor}"
+          color="${lineColor}"
+        >
+          <tr>
+            <td
+              cellpadding="8"
+              bgcolor="${headerBackgroundColor}"
+            ><font color="${headerForegroundColor}">${"&nbsp;".repeat(2)}${model.name}${"&nbsp;".repeat(2)}</font></td>
+          </tr>
+          <tr>
+            <td>
+              <table
+                border="0"
+                cellborder="0"
+                cellspacing="0"
+                cellpadding="4"
+                bgcolor="${bodyBackgroundColor}"
+              >
+                ${model.fields
+                  .filter(
+                    // exclude relation fields
+                    (field, i, fields) =>
+                      !fields.some((otherField) => otherField.relationFromFields?.includes(field.name)),
+                  )
+                  .map(
+                    (field) => `<tr>
+                      <td cellpadding="0" port="${
+                        field.kind === "enum" ||
+                        verticesRight.find((vertex) => vertex[0] === model.name && vertex[1] === field.name)
+                          ? field.name
+                          : ""
+                      }">${
+                        field.isId
+                          ? `<font color="${bodyForegroundColor}">&#9670;</font>`
+                          : field.relationFromFields !== undefined || field.kind === "enum"
+                          ? `<font color="${bodyForegroundColor}">&#9671;</font>`
+                          : ""
+                      }</td>
+                      <td align="left"><font color="${bodyForegroundColor}">${field.name}&nbsp;&nbsp;</font></td>
+                      <td align="left" port="${
+                        verticesLeft.find((vertex) => vertex[0] === model.name && vertex[1] === field.name)
+                          ? field.name
+                          : ""
+                      }"><font color="${typeForegroundColor}">${[
+                        field.type,
+                        field.isList ? "&nbsp;[&nbsp;]" : "",
+                        !field.isRequired ? "?" : "",
+                      ].join("")}&nbsp;</font></td>
+                    </tr>`,
+                  )
+                  .join("\n")}
+              </table>
+            </td>
+          </tr>
+        </table>>
+      ]
+    `,
   );
 
   const dotSource = `

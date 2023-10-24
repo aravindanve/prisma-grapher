@@ -46,6 +46,7 @@ generator erd {
   output                = "./ERD.svg"
   disabled              = false
   title                 = "Blog Schema"
+  ignoreEnums           = false
   lineColor             = "#004cff"
   headerBackgroundColor = "#bacefc"
   headerForegroundColor = "black"
