@@ -17,7 +17,7 @@
 <polygon fill="white" stroke="none" points="0,-395 0,-511 76,-511 76,-395 0,-395"/>
 <polygon fill="#bacefc" stroke="none" points="0,-477 0,-511 76,-511 76,-477 0,-477"/>
 <polygon fill="none" stroke="#004cff" points="0,-477 0,-511 76,-511 76,-477 0,-477"/>
-<text text-anchor="start" x="24.39" y="-490.4" font-family="Arial,sans-serif" font-weight="bold" font-size="14.00">Role</text>
+<text text-anchor="start" x="10.78" y="-489.4" font-family="Arial,sans-serif" font-size="14.00">  Role  </text>
 <polygon fill="none" stroke="#004cff" points="0,-395 0,-477 76,-477 76,-395 0,-395"/>
 <polygon fill="white" stroke="none" points="5,-400 5,-472 71,-472 71,-400 5,-400"/>
 <text text-anchor="start" x="14.28" y="-455.4" font-family="Arial,sans-serif" font-size="14.00">ADMIN</text>
@@ -31,7 +31,7 @@
 <polygon fill="white" stroke="none" points="260,-364 260,-624 424,-624 424,-364 260,-364"/>
 <polygon fill="#bacefc" stroke="none" points="260,-590 260,-624 424,-624 424,-590 260,-590"/>
 <polygon fill="none" stroke="#004cff" points="260,-590 260,-624 424,-624 424,-590 260,-590"/>
-<text text-anchor="start" x="328.01" y="-603.4" font-family="Arial,sans-serif" font-weight="bold" font-size="14.00">User</text>
+<text text-anchor="start" x="314.78" y="-602.4" font-family="Arial,sans-serif" font-size="14.00">  User  </text>
 <polygon fill="none" stroke="#004cff" points="260,-364 260,-590 424,-590 424,-364 260,-364"/>
 <polygon fill="white" stroke="none" points="265,-369 265,-585 419,-585 419,-369 265,-369"/>
 <text text-anchor="start" x="264.75" y="-568.8" font-family="Arial,sans-serif" font-size="14.00">◆</text>
@@ -69,7 +69,7 @@
 <polygon fill="white" stroke="none" points="608,-86 608,-370 797,-370 797,-86 608,-86"/>
 <polygon fill="#bacefc" stroke="none" points="608.5,-336 608.5,-370 797.5,-370 797.5,-336 608.5,-336"/>
 <polygon fill="none" stroke="#004cff" points="608.5,-336 608.5,-370 797.5,-370 797.5,-336 608.5,-336"/>
-<text text-anchor="start" x="690.17" y="-349.4" font-family="Arial,sans-serif" font-weight="bold" font-size="14.00">Post</text>
+<text text-anchor="start" x="676.94" y="-348.4" font-family="Arial,sans-serif" font-size="14.00">  Post  </text>
 <polygon fill="none" stroke="#004cff" points="608.5,-86 608.5,-336 797.5,-336 797.5,-86 608.5,-86"/>
 <polygon fill="white" stroke="none" points="613.5,-91 613.5,-331 792.5,-331 792.5,-91 613.5,-91"/>
 <text text-anchor="start" x="613.25" y="-314.8" font-family="Arial,sans-serif" font-size="14.00">◆</text>
@@ -111,7 +111,7 @@
 <polygon fill="white" stroke="none" points="981,-38 981,-250 1137,-250 1137,-38 981,-38"/>
 <polygon fill="#bacefc" stroke="none" points="981,-216 981,-250 1137,-250 1137,-216 981,-216"/>
 <polygon fill="none" stroke="#004cff" points="981,-216 981,-250 1137,-250 1137,-216 981,-216"/>
-<text text-anchor="start" x="1029.45" y="-229.4" font-family="Arial,sans-serif" font-weight="bold" font-size="14.00">Comment</text>
+<text text-anchor="start" x="1017.39" y="-228.4" font-family="Arial,sans-serif" font-size="14.00">  Comment  </text>
 <polygon fill="none" stroke="#004cff" points="981,-38 981,-216 1137,-216 1137,-38 981,-38"/>
 <polygon fill="white" stroke="none" points="986,-43 986,-211 1132,-211 1132,-43 986,-43"/>
 <text text-anchor="start" x="985.75" y="-194.8" font-family="Arial,sans-serif" font-size="14.00">◆</text>
@@ -144,7 +144,7 @@
 <polygon fill="white" stroke="none" points="264,-182 264,-346 420,-346 420,-182 264,-182"/>
 <polygon fill="#bacefc" stroke="none" points="264,-312 264,-346 420,-346 420,-312 264,-312"/>
 <polygon fill="none" stroke="#004cff" points="264,-312 264,-346 420,-346 420,-312 264,-312"/>
-<text text-anchor="start" x="314.4" y="-325.4" font-family="Arial,sans-serif" font-weight="bold" font-size="14.00">Category</text>
+<text text-anchor="start" x="302.34" y="-324.4" font-family="Arial,sans-serif" font-size="14.00">  Category  </text>
 <polygon fill="none" stroke="#004cff" points="264,-182 264,-312 420,-312 420,-182 264,-182"/>
 <polygon fill="white" stroke="none" points="269,-187 269,-307 415,-307 415,-187 269,-187"/>
 <text text-anchor="start" x="268.75" y="-290.8" font-family="Arial,sans-serif" font-size="14.00">◆</text>
@@ -173,7 +173,7 @@
 <polygon fill="white" stroke="none" points="264,0 264,-164 420,-164 420,0 264,0"/>
 <polygon fill="#bacefc" stroke="none" points="264,-130 264,-164 420,-164 420,-130 264,-130"/>
 <polygon fill="none" stroke="#004cff" points="264,-130 264,-164 420,-164 420,-130 264,-130"/>
-<text text-anchor="start" x="330.33" y="-143.4" font-family="Arial,sans-serif" font-weight="bold" font-size="14.00">Tag</text>
+<text text-anchor="start" x="317.12" y="-142.4" font-family="Arial,sans-serif" font-size="14.00">  Tag  </text>
 <polygon fill="none" stroke="#004cff" points="264,0 264,-130 420,-130 420,0 264,0"/>
 <polygon fill="white" stroke="none" points="269,-5 269,-125 415,-125 415,-5 269,-5"/>
 <text text-anchor="start" x="268.75" y="-108.8" font-family="Arial,sans-serif" font-size="14.00">◆</text>

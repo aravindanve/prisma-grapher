@@ -116,7 +116,7 @@ export async function generate(options: GeneratorOptions) {
           <td
             cellpadding="8"
             bgcolor="${headerBackgroundColor}"
-          ><font color="${headerForegroundColor}" point-size="17">${_enum.name}</font></td>
+          ><font color="${headerForegroundColor}">${"&nbsp;".repeat(2)}${_enum.name}${"&nbsp;".repeat(2)}</font></td>
         </tr>
         <tr>
           <td>
@@ -155,7 +155,7 @@ export async function generate(options: GeneratorOptions) {
           <td
             cellpadding="8"
             bgcolor="${headerBackgroundColor}"
-          ><font color="${headerForegroundColor}" point-size="17">${model.name}</font></td>
+          ><font color="${headerForegroundColor}">${"&nbsp;".repeat(2)}${model.name}${"&nbsp;".repeat(2)}</font></td>
         </tr>
         <tr>
           <td>
