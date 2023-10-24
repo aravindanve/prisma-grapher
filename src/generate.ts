@@ -58,7 +58,8 @@ export async function generate(options: GeneratorOptions) {
   );
 
   type Vertex = [string, string];
-  type Edge = [Vertex, Vertex];
+  type EdgeType = "1-1" | "1-m" | "m-m";
+  type Edge = [Vertex, Vertex, EdgeType];
 
   const verticesLeft = [] as Vertex[];
   const verticesRight = [] as Vertex[];
@@ -73,19 +74,21 @@ export async function generate(options: GeneratorOptions) {
           if (enumByName[aField.type]) {
             const bModel = enumByName[aField.type];
             const b = [bModel.name, ""] as Vertex;
-            return [b, a];
+            const t = !aField.isList ? "1-m" : "m-m";
+            return [b, a, t];
           } else {
             const bModel = modelByName[aField.type];
             const bField = bModel.fields.find((it) => it.type === aModel.name);
             const b = [bModel.name, bField?.name ?? ""] as Vertex;
 
-            return !aField.isList // evaluate direction
-              ? [b, a]
-              : !bField?.isList
-              ? [a, b]
+            // determine order and type
+            return !aField.isList && bField?.isList
+              ? [b, a, "1-m"]
+              : aField.isList && !bField?.isList
+              ? [a, b, "1-m"]
               : aModel.index < bModel.index
-              ? [a, b]
-              : [b, a];
+              ? [a, b, !aField.isList ? "1-1" : "m-m"]
+              : [b, a, !aField.isList ? "1-1" : "m-m"];
           }
         }),
     )
@@ -96,7 +99,11 @@ export async function generate(options: GeneratorOptions) {
 
   const relationDotDefinitions = relations.map(
     (edge) => `
-      edge [dir=both arrowtail=normal arrowhead=none]
+      edge [
+        dir=both
+        arrowtail=${edge[2].startsWith("1-") ? "normal" : "none"}
+        arrowhead=${edge[2].endsWith("-1") ? "normal" : "none"}
+      ]
       ${identifier(...edge[0])} -> ${identifier(...edge[1])}
     `,
   );
@@ -119,9 +126,7 @@ export async function generate(options: GeneratorOptions) {
                 <td
                   cellpadding="8"
                   bgcolor="${headerBackgroundColor}"
-                ><font color="${headerForegroundColor}">${"&nbsp;".repeat(2)}${_enum.name}${"&nbsp;".repeat(
-                  2,
-                )}</font></td>
+                ><font color="${headerForegroundColor}">&nbsp;&nbsp;${_enum.name}&nbsp;&nbsp;</font></td>
               </tr>
               <tr>
                 <td>
@@ -133,7 +138,10 @@ export async function generate(options: GeneratorOptions) {
                     bgcolor="${bodyBackgroundColor}"
                   >
                     ${_enum.values
-                      .map((value) => `<tr><td><font color="${bodyForegroundColor}">${value.name}</font></td></tr>`)
+                      .map(
+                        (value) =>
+                          `<tr><td><font color="${bodyForegroundColor}">&nbsp;&nbsp;${value.name}&nbsp;&nbsp;</font></td></tr>`,
+                      )
                       .join("\n")}
                   </table>
                 </td>
@@ -161,7 +169,7 @@ export async function generate(options: GeneratorOptions) {
             <td
               cellpadding="8"
               bgcolor="${headerBackgroundColor}"
-            ><font color="${headerForegroundColor}">${"&nbsp;".repeat(2)}${model.name}${"&nbsp;".repeat(2)}</font></td>
+            ><font color="${headerForegroundColor}">&nbsp;&nbsp;${model.name}&nbsp;&nbsp;</font></td>
           </tr>
           <tr>
             <td>
@@ -200,8 +208,8 @@ export async function generate(options: GeneratorOptions) {
                       }"><font color="${typeForegroundColor}">${[
                         field.type,
                         field.isList ? "&nbsp;[&nbsp;]" : "",
-                        !field.isRequired ? "?" : "",
-                      ].join("")}&nbsp;</font></td>
+                        !field.isRequired ? "&nbsp;?" : "",
+                      ].join("")}&nbsp;&nbsp;</font></td>
                     </tr>`,
                   )
                   .join("\n")}
