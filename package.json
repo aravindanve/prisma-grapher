@@ -1,6 +1,6 @@
 {
   "name": "prisma-grapher",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "ERD generator for prisma schemas",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
