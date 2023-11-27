@@ -73,12 +73,15 @@ model Post {
 }
 
 model Comment {
-  id      Int      @id @default(autoincrement())
-  name    String
-  email   String
-  text    String
-  post    Post     @relation(fields: [postId], references: [id])
-  postId  Int
-  created DateTime @db.Timestamptz
-  updated DateTime @db.Timestamptz
+  id       Int       @id @default(autoincrement())
+  name     String
+  email    String
+  text     String
+  post     Post      @relation(fields: [postId], references: [id])
+  postId   Int
+  parentId Int?
+  parent   Comment?  @relation("Comments", fields: [parentId], references: [id])
+  comments Comment[] @relation("Comments")
+  created  DateTime  @db.Timestamptz
+  updated  DateTime  @db.Timestamptz
 }
