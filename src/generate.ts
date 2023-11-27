@@ -68,6 +68,7 @@ export async function generate(options: GeneratorOptions) {
     .flatMap((aModel) =>
       aModel.fields
         .filter((aField) => enumByName[aField.type] || modelByName[aField.type])
+        .filter((aField) => aField.type !== aModel.name) // skip self relations
         .map<Edge>((aField) => {
           const a = [aModel.name, aField.name] as Vertex;
 
