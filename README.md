@@ -51,6 +51,7 @@ generator erd {
   headerBackgroundColor = "#bacefc"
   headerForegroundColor = "black"
   bodyBackgroundColor   = "white"
+  bodyBackgroundColor2  = "e8efff"
   bodyForegroundColor   = "black"
   typeForegroundColor   = "#4f83ff"
 }

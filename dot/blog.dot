@@ -32,34 +32,80 @@ digraph UML_Class_diagram {
 		</table>>
 	]
 	
-	edge [dir=both arrowtail=normal arrowhead=none]
-	Role -> User:role
+	edge [dir=both arrowtail=tee arrowhead=crow]
+	Role:e -> User:role:w
 
 	User [
 	    shape=plain
-	    label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4" bgcolor="white" color="#004cff">
-			<tr> <td cellpadding="8" bgcolor="#bacefc"> <b>User</b> </td> </tr>
-			<tr>
-			  <td>
-				<table border="0" cellborder="0" cellspacing="0" cellpadding="4" bgcolor="white">
-					<tr> <td cellpadding="0">◆</td> <td align="left">id</td> <td align="left"><font color="#4f83ff">Int</font></td> </tr>
-					<tr> <td cellpadding="0"></td> <td align="left">name</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
-					<tr> <td cellpadding="0"></td> <td align="left">image</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
-					<tr> <td cellpadding="0"></td> <td align="left">email</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
-					<tr> <td cellpadding="0"></td> <td align="left">password</td> <td align="left"><font color="#4f83ff">String</font></td> </tr>
-					<tr> <td cellpadding="0" port="role">◇</td> <td align="left">role</td> <td align="left"><font color="#4f83ff">Role</font></td> </tr>
-					<tr> <td cellpadding="0"></td> <td align="left">created</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
-					<tr> <td cellpadding="0"></td> <td align="left">updated</td> <td align="left"><font color="#4f83ff">DateTime</font></td> </tr>
-					<tr> <td cellpadding="0">◇</td> <td align="left">posts</td> <td align="left" port="posts"><font color="#4f83ff">Post[]</font></td> </tr>
-
-				</table>
-			  </td>
-			</tr>
-		</table>>
+	    label=<<table bgcolor="white" color="#004cff" border="0" cellborder="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td bgcolor="#bacefc" color="#004cff" border="1" cellpadding="8"><b>User</b></td>
+				</tr>
+				<tr>
+					<td>
+						<table bgcolor="white" color="#004cff" border="0" cellborder="0" cellspacing="0" cellpadding="4">
+							<tr>
+								<td bgcolor="white" color="#004cff" border="1" sides="L">◆</td>
+								<td bgcolor="white" color="#004cff" align="left">id</td>
+								<td bgcolor="white" color="#004cff" align="left"><font color="#4f83ff">Int</font></td>
+								<td bgcolor="white" color="#004cff" border="1" sides="R"></td>
+							</tr>
+							<tr>
+								<td bgcolor="#e8efff" color="#004cff" border="1" sides="L"></td>
+								<td bgcolor="#e8efff" color="#004cff" align="left">name</td>
+								<td bgcolor="#e8efff" color="#004cff" align="left"><font color="#4f83ff">String</font></td>
+								<td bgcolor="#e8efff" color="#004cff" border="1" sides="R"></td>
+							</tr>
+							<tr>
+								<td bgcolor="white" color="#004cff" border="1" sides="L"></td>
+								<td bgcolor="white" color="#004cff" align="left">image</td>
+								<td bgcolor="white" color="#004cff" align="left"><font color="#4f83ff">String</font></td>
+								<td bgcolor="white" color="#004cff" border="1" sides="R"></td>
+							</tr>
+							<tr>
+								<td bgcolor="#e8efff" color="#004cff" border="1" sides="L"></td>
+								<td bgcolor="#e8efff" color="#004cff" align="left">email</td>
+								<td bgcolor="#e8efff" color="#004cff" align="left"><font color="#4f83ff">String</font></td>
+								<td bgcolor="#e8efff" color="#004cff" border="1" sides="R"></td>
+							</tr>
+							<tr>
+								<td bgcolor="white" color="#004cff" border="1" sides="L"></td>
+								<td bgcolor="white" color="#004cff" align="left">password</td>
+								<td bgcolor="white" color="#004cff" align="left"><font color="#4f83ff">String</font></td>
+								<td bgcolor="white" color="#004cff" border="1" sides="R"></td>
+							</tr>
+							<tr>
+								<td bgcolor="#e8efff" color="#004cff" border="1" sides="L" port="role">◇</td>
+								<td bgcolor="#e8efff" color="#004cff" align="left">role</td>
+								<td bgcolor="#e8efff" color="#004cff" align="left"><font color="#4f83ff">Role</font></td>
+								<td bgcolor="#e8efff" color="#004cff" align="left" border="1" sides="R"></td>
+							</tr>
+							<tr>
+								<td bgcolor="white" color="#004cff" border="1" sides="L"></td>
+								<td bgcolor="white" color="#004cff" align="left">created</td>
+								<td bgcolor="white" color="#004cff" align="left"><font color="#4f83ff">DateTime</font></td>
+								<td bgcolor="white" color="#004cff" align="left" border="1" sides="R"></td>
+							</tr>
+							<tr>
+								<td bgcolor="#e8efff" color="#004cff" border="1" sides="L"></td>
+								<td bgcolor="#e8efff" color="#004cff" align="left">updated</td>
+								<td bgcolor="#e8efff" color="#004cff" align="left"><font color="#4f83ff">DateTime</font></td>
+								<td bgcolor="#e8efff" color="#004cff" align="left" border="1" sides="R"></td>
+							</tr>
+							<tr>
+								<td bgcolor="white" color="#004cff" border="1" sides="LB">◇</td>
+								<td bgcolor="white" color="#004cff" align="left" border="1" sides="B">posts</td>
+								<td bgcolor="white" color="#004cff" align="left" border="1" sides="B"><font color="#4f83ff">Post[]</font></td>
+								<td bgcolor="white" color="#004cff" align="left" border="1" sides="RB" port="posts"></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>>
 	]
 	
-	edge [dir=both arrowtail=normal arrowhead=none]
-	User:posts -> Post:author
+	edge [dir=both arrowtail=tee arrowhead=none]
+	User:posts:e -> Post:author:w
 	
 	Category [
 	    shape=plain
