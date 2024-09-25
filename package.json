@@ -16,7 +16,7 @@
   "homepage": "https://github.com/aravindanve/prisma-grapher",
   "license": "MIT",
   "scripts": {
-    "postinstall": "husky install",
+    "postinstall": "husky",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
     "test": "jest",
@@ -39,13 +39,13 @@
     "@prisma/client": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
-    "@hpcc-js/wasm": "^2.16.1",
+    "@hpcc-js/wasm": "=2.16.1",
     "@prisma/generator-helper": "^5.4.2"
   },
   "devDependencies": {
     "@prisma/client": "^5.4.2",
     "@types/jest": "^29.5.6",
-    "@types/node": "^20.8.7",
+    "@types/node": "^22.7.0",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
     "eslint": "^8.52.0",
